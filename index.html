@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparación de Tamaño de Texto</title>
+    <style>
+        .font-size-section {
+            border: 2px solid #ccc;
+            padding: 20px;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        .pixel-text {
+            font-size: 16px; /* Fijo en píxeles */
+        }
+        .relative-text {
+            font-size: 1rem; /* Relativo a la configuración del usuario */
+        }body {
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+      margin: 2rem;
+      color: #222;
+      background: #ffffff;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    section {
+      border: 2px solid #cccccc;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 1.5rem;
+    }
+
+    .note {
+      padding: 1rem;
+      border-left: 4px solid #555;
+      background: #f5f5f5;
+      margin-bottom: 1rem;
+    }
+
+    .button-set {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+   .non-adaptive-focus-button {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #333333;
+  border-radius: 6px;
+  background-color: #ffffff;
+  color: #222222;
+  cursor: pointer;
+}
+
+/* Problematic example:
+   The focus outline uses a fixed color that matches the user-selected background color. */
+.non-adaptive-focus-button:focus-visible {
+  outline: 3px solid #0AD29C;
+  outline-offset: 3px;
+}
+    </style>
+</head>
+<body>
+    <div class="font-size-section">
+        <h2>Comparación de Tamaño de Texto</h2>
+        <p class="pixel-text">Este texto usa píxeles (16px). No se adapta a las preferencias del usuario.</p>
+        <p class="relative-text">Este texto usa unidades relativas (1rem). Se ajusta al tamaño de fuente preferido por el usuario.</p>
+    </div><section aria-labelledby="focus-outline-title">
+      <h2 id="focus-outline-title">Focus outline after changing browser colors</h2>
+
+      <div class="note">
+        <p>
+          This example is intended to be tested in Firefox using browser color preferences.
+          Go to Firefox settings, search for “color”, select Website contrast, choose Custom,
+          and use Manage Colors to change the background color.
+        </p>
+        <p>
+          Then use the Tab key to move focus through the buttons below and check whether the
+          focus outline remains visible.
+        </p>
+      </div>
+
+      <div class="button-set" aria-label="Focus outline examples">
+        <button class="bad-focus-button">
+          Hardcoded white focus outline
+        </button>
+
+        <button class="current-color-focus-button">
+          Focus outline using currentColor
+        </button>
+
+        <button class="system-color-focus-button">
+          Focus outline using system color
+        </button><button class="non-adaptive-focus-button">
+  Fixed focus outline
+</button>
+      </div>
+
+      <div class="description">
+        <p>
+          The first button may fail because its focus outline uses a fixed white color.
+          If the user changes the browser background color to white or a very light color,
+          the focus indicator may become difficult or impossible to perceive.
+        </p>
+
+        <p>
+          The second and third buttons are safer examples because their focus indicators are
+          based on user-adaptable colors rather than a fixed visual color.
+        </p>
+      </div>
+    </section>
+</body>
+</html>
